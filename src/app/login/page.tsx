@@ -2,8 +2,10 @@
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { useState } from "react";
-import { Toaster, toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -25,31 +27,23 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="h-screen flex items-center justify-center bg-gray-800 p-6">
-      <Toaster richColors position="top-center" />
-      <div className="bg-gray-900 p-8 rounded-lg shadow-md w-96">
-        <input
+    <main className="flex h-full w-full items-center justify-center p-6">
+      <div className="flex w-96 flex-col gap-4">
+        <Input
           type="email"
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
-          className="mb-4 w-full p-3 rounded-md border border-gray-700 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
         />
-        <input
+        <Input
           type="password"
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          className="mb-4 w-full p-3 rounded-md border border-gray-700 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
         />
-        <button
-          onClick={handleSignIn}
-          className="w-full p-3 rounded-md bg-gray-700 text-white hover:bg-gray-600 focus:outline-none"
-        >
-          Sign In
-        </button>
+        <Button onClick={handleSignIn}>Sign In</Button>
       </div>
     </main>
   );
