@@ -3,19 +3,8 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import * as D from "@/components/ui/dialog";
+import * as S from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
@@ -38,15 +27,14 @@ export default function StreamsPage() {
         </Button>
       </div>
       <div className="flex w-full flex-1 flex-col items-center justify-center">
-        <Dialog>
-          <DialogTrigger>
+        <D.Dialog>
+          <D.DialogTrigger>
             <Button>New Stream</Button>
-          </DialogTrigger>
-          <DialogContent>
+          </D.DialogTrigger>
+          <D.DialogContent>
             <div className="flex items-center justify-center">
               <div className="mb-4 flex w-96 flex-col items-center justify-center gap-4">
                 <h1 className="text-xl font-bold">New Stream</h1>
-
                 <Input
                   type="text"
                   name="name"
@@ -54,44 +42,40 @@ export default function StreamsPage() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Name"
                 />
-
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="concluded">Concluded</SelectItem>
-                    <SelectItem value="ongoing">Ongoing</SelectItem>
-                  </SelectContent>
-                </Select>
-
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="anime">Anime</SelectItem>
-                    <SelectItem value="movie">Movie</SelectItem>
-                    <SelectItem value="series">Series</SelectItem>
-                  </SelectContent>
-                </Select>
-
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Progress" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="not-started">Not Started</SelectItem>
-                    <SelectItem value="complete">Complete</SelectItem>
-                    <SelectItem value="in-progress">In progress</SelectItem>
-                  </SelectContent>
-                </Select>
-
+                <S.Select>
+                  <S.SelectTrigger>
+                    <S.SelectValue placeholder="Status" />
+                  </S.SelectTrigger>
+                  <S.SelectContent>
+                    <S.SelectItem value="concluded">Concluded</S.SelectItem>
+                    <S.SelectItem value="ongoing">Ongoing</S.SelectItem>
+                  </S.SelectContent>
+                </S.Select>
+                <S.Select>
+                  <S.SelectTrigger>
+                    <S.SelectValue placeholder="Category" />
+                  </S.SelectTrigger>
+                  <S.SelectContent>
+                    <S.SelectItem value="anime">Anime</S.SelectItem>
+                    <S.SelectItem value="movie">Movie</S.SelectItem>
+                    <S.SelectItem value="series">Series</S.SelectItem>
+                  </S.SelectContent>
+                </S.Select>
+                <S.Select>
+                  <S.SelectTrigger>
+                    <S.SelectValue placeholder="Progress" />
+                  </S.SelectTrigger>
+                  <S.SelectContent>
+                    <S.SelectItem value="not-started">Not Started</S.SelectItem>
+                    <S.SelectItem value="complete">Complete</S.SelectItem>
+                    <S.SelectItem value="in-progress">In progress</S.SelectItem>
+                  </S.SelectContent>
+                </S.Select>
                 <Button className="w-full">Create</Button>
               </div>
             </div>
-          </DialogContent>
-        </Dialog>
+          </D.DialogContent>
+        </D.Dialog>
       </div>
     </div>
   );
