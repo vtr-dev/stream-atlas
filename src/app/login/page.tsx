@@ -29,6 +29,7 @@ export default function LoginPage() {
   return (
     <main className="flex h-full w-full items-center justify-center p-6">
       <div className="flex w-96 flex-col gap-4">
+        <h1 className="text-2xl font-bold">Login</h1>
         <Input
           type="email"
           name="email"
