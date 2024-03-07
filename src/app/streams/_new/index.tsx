@@ -15,6 +15,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Stream } from "@/types";
 import { X } from "lucide-react";
 import { Season } from "@/entity/Season";
+import { v4 as uuidv4 } from "uuid";
 
 const NewStreamFormSchema = z.object({
   name: z.string().min(5, {
@@ -97,6 +98,24 @@ function NewStreamForm({ updateStreams }: Props) {
       return;
     }
 
+    const streamImage = document.getElementById(
+      "stream_id",
+    ) as HTMLInputElement;
+
+    const fileName = uuidv4();
+
+    if (streamImage.files) {
+      const file = streamImage.files[0];
+      const { error } = await supabase.storage
+        .from("stream_images")
+        .upload(`public/${fileName}`, file);
+
+      if (error) {
+        toast.error("Failed to upload stream image");
+        console.error(error);
+      }
+    }
+
     const { data, error } = await supabase
       .from("streams")
       .insert({
@@ -106,6 +125,7 @@ function NewStreamForm({ updateStreams }: Props) {
         user_progress,
         user_id: user.id,
         user_rating: parseFloat(user_rating),
+        image_path: fileName,
       })
       .select();
 
@@ -261,6 +281,20 @@ function NewStreamForm({ updateStreams }: Props) {
                       <F.FormControl>
                         <Input placeholder="User Rating" {...field} />
                       </F.FormControl>
+                      <F.FormMessage />
+                    </F.FormItem>
+                  )}
+                />
+
+                <F.FormField
+                  name="stream_image"
+                  render={({ field }) => (
+                    <F.FormItem>
+                      <Input
+                        id="stream_id"
+                        type="file"
+                        className="cursor-pointer"
+                      />
                       <F.FormMessage />
                     </F.FormItem>
                   )}

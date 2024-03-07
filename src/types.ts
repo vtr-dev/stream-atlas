@@ -5,4 +5,5 @@ export type Stream = {
   category: string;
   user_progress: string;
   user_rating: string;
+  image_path: string;
 };

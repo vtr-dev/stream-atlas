@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/table";
 import { Stream } from "@/types";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export default function StreamsPage() {
   const [isClient, setIsClient] = useState(false);
@@ -38,6 +39,24 @@ export default function StreamsPage() {
     setIsClient(true);
     fetchStreams();
   }, [supabase]);
+
+  const getStreamImageSrc = (image_path: string) => {
+    const { data } = supabase.storage
+      .from("stream_images")
+      .getPublicUrl(`public/${image_path}`, {
+        transform: {
+          width: 32,
+          height: 32,
+        },
+      });
+
+    if (data) {
+      console.log(data);
+      return data.publicUrl;
+    }
+
+    return "Image not found";
+  };
 
   return (
     <div className="flex h-full w-full flex-col justify-between gap-4 p-4">
@@ -74,6 +93,7 @@ export default function StreamsPage() {
                 <TableHead>Category</TableHead>
                 <TableHead>User Progress</TableHead>
                 <TableHead>User Rating</TableHead>
+                <TableHead>Image</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -85,6 +105,18 @@ export default function StreamsPage() {
                   <TableCell>{stream.category}</TableCell>
                   <TableCell>{stream.user_progress}</TableCell>
                   <TableCell>{stream.user_rating}</TableCell>
+                  <TableCell>
+                    <img
+                      src={
+                        getStreamImageSrc(stream?.image_path).includes("null")
+                          ? "/next.svg"
+                          : getStreamImageSrc(stream?.image_path)
+                      }
+                      alt="Stream Image"
+                      width={32}
+                      height={32}
+                    />
+                  </TableCell>
                   <TableCell className="flex justify-end gap-2 text-right">
                     <Button variant={"ghost"}>Edit</Button>
                     <Button
