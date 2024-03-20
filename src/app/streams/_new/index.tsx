@@ -12,10 +12,10 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { Stream } from "@/types";
 import { X } from "lucide-react";
 import { Season } from "@/entity/Season";
 import { v4 as uuidv4 } from "uuid";
+import { Stream } from "@/entity/Stream";
 
 const NewStreamFormSchema = z.object({
   name: z.string().min(5, {

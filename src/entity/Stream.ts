@@ -1,9 +1,12 @@
-import { Season } from "./Season";
-
 export type Stream = {
-  id: string;
-  title: string;
+  id: number;
+  user_id: string;
+  name: string;
+  status: "ongoing" | "concluded" | "not-started" | "hiatus";
+  category: "anime" | "movie" | "series";
+  user_progress: "in-progress" | "complete" | "not-started" | "dropped";
   user_rating: number;
-  seasons: Season[];
-  status: "in-progress" | "completed";
+  image_path: string;
+  created_at: string;
+  updated_at: string;
 };
