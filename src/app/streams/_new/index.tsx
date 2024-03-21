@@ -35,11 +35,7 @@ const NewStreamFormSchema = z.object({
   }),
 });
 
-type Props = {
-  updateStreams: Dispatch<SetStateAction<Stream[]>>;
-};
-
-function NewStreamForm({ updateStreams }: Props) {
+function NewStreamForm() {
   const supabase = createClientComponentClient();
 
   const [isClient, setIsClient] = useState(false);
@@ -135,7 +131,6 @@ function NewStreamForm({ updateStreams }: Props) {
     } else {
       toast.success("Stream created successfully");
       if (data) {
-        updateStreams((prev: Stream[]) => [...prev, data[0]]);
         seasons.forEach(async (season) => {
           const { error } = await supabase.from("seasons").insert({
             code: season.code,
@@ -170,7 +165,7 @@ function NewStreamForm({ updateStreams }: Props) {
   return (
     <>
       {isClient && (
-        <div className="mb-2 flex flex-col items-center justify-center gap-8">
+        <div className="mb-2 flex flex-col items-center justify-center gap-8 text-black">
           <h1 className="text-xl font-bold">New Stream</h1>
           <div className="max-h-[615px] overflow-y-auto p-2">
             <F.Form {...form}>

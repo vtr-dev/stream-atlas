@@ -28,7 +28,7 @@ const MovieCard = ({ data }: { data: Stream }) => {
   const genres = ["Action", "Adventure"];
 
   return (
-    <Link href={`/movie/${id}`} className="block outline-none">
+    <Link href={`/streams/${id}`} className="block outline-none">
       <li className="relative mx-auto flex h-full w-full max-w-md overflow-hidden rounded-xl bg-slate-950 text-white shadow-lg transition duration-500 ease-in-out after:absolute after:inset-0 after:bg-gradient-to-t after:from-black after:via-slate-900 after:to-transparent focus-within:outline focus-within:outline-pink-600 hover:-translate-y-2 hover:shadow-2xl">
         <div className="group relative z-10 px-6 pb-10">
           <header className="inner flex flex-col pb-8">

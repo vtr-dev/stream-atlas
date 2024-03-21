@@ -39,23 +39,6 @@ function RootLayout({ children, modal }: RootLayoutProps) {
 
         <main className="container mx-auto">{children}</main>
         {modal}
-        <footer className="flex items-center justify-center gap-2 py-12">
-          <span>Powered by</span>
-          <a
-            className="inline-block"
-            href="https://xata.io"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <Image
-              src="/xatafly-white.svg"
-              alt="Xata Logo"
-              width={24}
-              height={24}
-              className="w-6"
-            />
-          </a>
-        </footer>
       </body>
     </html>
   );
